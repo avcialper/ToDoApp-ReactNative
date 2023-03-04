@@ -4,12 +4,13 @@ import TaskCard from "./components/TaskCard"
 import AddToDo from "./components/AddToDo"
 import Icon from "react-native-vector-icons/FontAwesome"
 import styles from "./App.styles"
+import data from "./data.json"
 
 const App = () => {
 
   // States
-  const [taskList, setTaskList] = useState([{ id: 1, title: 'Learn React Native!!', isDone: true }])
-  const [sumCompleted, setSumCompleted] = useState(taskList.filter(item => item.isDone))
+  const [taskList, setTaskList] = useState(data)
+  const [sumCompleted, setSumCompleted] = useState(data.filter(item => item.isDone))
 
   // Add new task to list
   function addNewTask(taskName) {
@@ -17,14 +18,14 @@ const App = () => {
       const uId = Date.now()
       setTaskList(taskList.concat({ id: uId, title: taskName, isDone: false }))
     } else {
-      Alert.alert('Warning!', 'Please name the task..')
+      Alert.alert('Warning!', 'Please give a name the task..')
     }
   }
 
   // Find completed tasks
-  function filterDone(){
-    const list = taskList.filter(task => task.isDone)
-    setSumCompleted(list)
+  function filterDone(list){
+    const filteredList = list.filter(task => task.isDone)
+    setSumCompleted(filteredList)
   }
 
   // Render tasks card
@@ -48,7 +49,7 @@ const App = () => {
       </View>
       {
         taskList.length === 0 && <View style={styles.emptyContainer}>
-          <Text style={styles.zeroTask}>You have not a task. Come on let's go start work!!</Text>
+          <Text style={styles.zeroTask}>You have not a task.</Text>
           </View>
       }
       {

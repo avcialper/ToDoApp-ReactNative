@@ -18,12 +18,12 @@ const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
         });
         setTaskList(list);
         setTaskState(!taskState)
-        filterDone()
+        filterDone(list)
     }
 
     // For warning before deletion
     const onLongPress = () => {
-        Alert.alert('Are you sure?',`${task.title} will be deleted!`, [
+        Alert.alert('Are you sure?',`"${task.title}" will be deleted!`, [
             {text: 'Yes', onPress: () => deleteTask(task)},
             {text: 'No'}
         ])
@@ -33,7 +33,7 @@ const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
     const deleteTask = (task) => {
         const list = taskList.filter(item => item.id !== task.id)
         setTaskList(list)
-        if(taskState) setSumCompleted(sumCompleted - 1)
+        filterDone(list)
     }
 
     return (
