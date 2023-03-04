@@ -5,8 +5,10 @@ import styles from "./TaskCard.styles"
 
 const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
 
+    // Icon state
     const [taskState, setTaskState] = useState(task.isDone)
 
+    // The values change after pressing the icon
     const changeState = () => {
         const list = taskList.map(item => {
             if (item.id === task.id) {
@@ -19,6 +21,7 @@ const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
         filterDone()
     }
 
+    // For warning before deletion
     const onLongPress = () => {
         Alert.alert('Are you sure?',`${task.title} will be deleted!`, [
             {text: 'Yes', onPress: () => deleteTask(task)},
@@ -26,6 +29,7 @@ const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
         ])
     }
 
+    // to delete a task
     const deleteTask = (task) => {
         const list = taskList.filter(item => item.id !== task.id)
         setTaskList(list)

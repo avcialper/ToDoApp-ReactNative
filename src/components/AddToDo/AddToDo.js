@@ -4,8 +4,10 @@ import styles from "./AddToDo.styles"
 
 const AddToDo = ({addNewTask}) => {
 
+    // Input state
     const [text, setText] = useState("")
 
+    // Add new task to list
     function newTaskName(){
         addNewTask(text)
         setText("")

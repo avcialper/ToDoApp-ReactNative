@@ -7,9 +7,11 @@ import styles from "./App.styles"
 
 const App = () => {
 
+  // States
   const [taskList, setTaskList] = useState([{ id: 1, title: 'Learn React Native!!', isDone: true }])
   const [sumCompleted, setSumCompleted] = useState(taskList.filter(item => item.isDone))
 
+  // Add new task to list
   function addNewTask(taskName) {
     if (taskName !== "") {
       const uId = Date.now()
@@ -19,11 +21,13 @@ const App = () => {
     }
   }
 
+  // Find completed tasks
   function filterDone(){
     const list = taskList.filter(task => task.isDone)
     setSumCompleted(list)
   }
 
+  // Render tasks card
   const renderTasks = ({ item }) =>
     <TaskCard
       task={item}
