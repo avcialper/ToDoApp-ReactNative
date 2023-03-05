@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { View, Text, FlatList, Alert } from "react-native"
+import React, { useState } from "react"
+import { View, Text, FlatList, ToastAndroid, Platform, Alert} from "react-native"
 import TaskCard from "./components/TaskCard"
 import AddToDo from "./components/AddToDo"
 import Icon from "react-native-vector-icons/FontAwesome"
@@ -17,8 +17,9 @@ const App = () => {
     if (taskName !== "") {
       const uId = Date.now()
       setTaskList(taskList.concat({ id: uId, title: taskName, isDone: false }))
+      showToast('TASK ADDED')
     } else {
-      Alert.alert('Warning!', 'Please give a name the task..')
+      showToast('PLEASE GIVE A NAME TASK')
     }
   }
 
@@ -35,7 +36,16 @@ const App = () => {
       setTaskList={setTaskList}
       taskList={taskList}
       filterDone={filterDone}
+      showToast={showToast}
     />
+
+  function showToast(message){
+    if(Platform.OS === 'ios'){
+      Alert.alert('ALERT',message)
+    } else {
+      ToastAndroid.show(message, ToastAndroid.SHORT)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -60,7 +70,6 @@ const App = () => {
           renderItem={renderTasks}
         />
       }
-
       <AddToDo addNewTask={addNewTask} />
     </View>
   )

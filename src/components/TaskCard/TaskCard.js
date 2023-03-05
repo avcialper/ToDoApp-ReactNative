@@ -1,9 +1,10 @@
 import React, { useState } from "react"
 import { View, Text, Alert } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
+import { Toast } from "react-native-toast-message/lib/src/Toast"
 import styles from "./TaskCard.styles"
 
-const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
+const TaskCard = ({ task, setTaskList, taskList, filterDone, showToast }) => {
 
     // Icon state
     const [taskState, setTaskState] = useState(task.isDone)
@@ -34,6 +35,7 @@ const TaskCard = ({ task, setTaskList, taskList, filterDone }) => {
         const list = taskList.filter(item => item.id !== task.id)
         setTaskList(list)
         filterDone(list)
+        showToast('TASK DELETED')
     }
 
     return (
